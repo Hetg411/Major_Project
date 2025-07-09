@@ -224,7 +224,10 @@ app.get("/home",async(req,res)=>{
     
 // })
 
-
+app.get('/', async (req, res) => {
+  let alldata=await listing.find();
+    res.render("listing/index.ejs",{alldata,user:req.session.user});
+});
 app.listen(8080,()=>{
     console.log("listning");
 })
