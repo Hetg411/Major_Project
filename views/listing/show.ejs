@@ -1,0 +1,106 @@
+<% layout("/layout/boilerplate.ejs") -%>
+<style>
+  .showbody {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.card-text {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+@media (max-width: 800px) {
+  .image-index {
+    height: 180px;
+  }
+
+  .index .row {
+    margin-top: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+/* On small mobile screens */
+@media (max-width: 480px) {
+  .image-index {
+    height: 190px;
+   width: 250px;
+  }
+  .map-show{
+    height: 190px;
+   width: 250px !important;
+  }
+}
+
+
+</style>
+<script>
+  const coordinates = <%- JSON.stringify(data.geometry) %>; // [lng, lat]
+</script>
+<body>
+   <div class="card showcard" >
+ <div class="row g-3">
+   <div class="col-6 offset-2 ">
+      <img src="<%= data.image.url %>" class="card-img-top imagecla image-index" alt="...">
+   </div>
+   <div class="col-12 col-md-7">
+    
+    <div class="card-body showbody   ">
+    <h5 class="card-title"><%= data.title %></h5>
+    <p class="card-text"><%= data.description %></p>
+      <p class="card-text">&#8377; <%= data.price.toLocaleString("en-IN") %></p>
+        <p class="card-text"><%= data.location %></p>
+         <p class="card-text"><%= data.country %></p>
+ <div class="showbtn">
+    <form method="GET" class="shbt" action="/home/update/<%= data._id %>"><button>Update</button></form><br><br>
+
+ 
+    <form method="POST" class="shbt" action="/home/delete/<%=data._id%>?_method=DELETE"><button>Delete</button></form>
+   
+     
+ </div>
+ <h3>Where You'll be</h3>
+ <div id="map" class="map-show"  style="height: 400px; width: 60%; background-color: white;"></div>
+ <script>
+  async function initMap() {
+    const { Map, Marker } = await google.maps.importLibrary("maps");
+const coords =  JSON.stringify({ lat: data.geometry[0], lng: data.geometry[1] });
+
+
+    const map = new Map(document.getElementById("map"), {
+      center: coords,
+      zoom: 12,
+    });
+
+    new Marker({
+      position: coords,
+      map: map,
+      title: "<%= data.title %>"
+    });
+  }
+
+  initMap();
+</script>
+
+  </div>
+ </div>
+ 
+</div> 
+
+
+   
+</div>
+<div class="row">
+<div class="col-6 offset-2">
+  
+
+</div>
+</div>
+   </div>
+
+  <script src="/js/map.js"></script>
+</body>

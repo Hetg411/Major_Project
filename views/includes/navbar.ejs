@@ -1,0 +1,100 @@
+<style>
+ <style>
+  .search-btn1 {
+    padding: 0 2rem;
+    min-width: 150px;
+  }
+
+  .search-btn2 {
+    background-color: red;
+    margin-left: 1rem;
+    color: white;
+  }
+
+  .search-btn2:hover {
+    background-color: darkred;
+    color: white;
+  }
+
+  @media (max-width: 576px) {
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 0.5rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 0.25rem 0;
+  }
+
+  /* Search box */
+  .search-box {
+    width: 100%;
+  }
+
+  .search-box form {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .search-btn1,
+  .search-btn2 {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 0.95rem;
+    margin-left: 0 !important;
+  }
+
+  /* Optional spacing for sign-in, add, logout links */
+  .addlink {
+    font-size: 0.9rem;
+    text-align: left;
+    padding-left: 0.2rem;
+  }
+}
+</style>
+</style>
+
+<nav class="navbar navbar-expand bg-body-tertiary border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/home"><i class="fa-regular fa-compass"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav w-100 align-items-center">
+
+        <a class="nav-link" href="/home">Explore</a>
+
+        <!-- ✅ Search Box -->
+        <div class="search-box mx-auto">
+          <form class="d-flex" role="search">
+            <input class="form-control search-btn1" type="search" placeholder="Search" aria-label="Search" />
+            <button class="btn search-btn2" type="submit">Search</button>
+          </form>
+        </div>
+
+        <a class="nav-link addlink" href="/home/new">AirBib your home</a>
+        <a class="nav-link addlink" href="/home/signin">Sign up</a>
+
+        <% if (user) { %>
+          <a class="nav-link addlink" href="/home/logout">Log out</a>
+        <% } else { %>
+          <a class="nav-link addlink" href="/home/login">Log in</a>
+        <% } %>
+
+      </div>
+    </div>
+  </div>
+</nav>
