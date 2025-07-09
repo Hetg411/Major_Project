@@ -20,7 +20,6 @@ const Client=require("@googlemaps/google-maps-services-js").Client;
 const client=new Client({});
 
 const axios = require('axios');
-const API_KEY=process.env.API_KEY;
 const address = "Delhi,India";
 
 let login=false;
@@ -128,6 +127,7 @@ app.delete("/home/delete/:id",  async (req, res) => {
 
 
 app.use(express.static(path.join(__dirname,"/public")));
+const API_KEY = process.env.Google_Map_Key;
 app.post("/home/addnew",upload.single('listing[img]'), async(req,res)=>{ 
     
     const address = req.body.listing.location; // or use req.body.listing.location
@@ -137,7 +137,6 @@ app.post("/home/addnew",upload.single('listing[img]'), async(req,res)=>{
                 key: API_KEY
             }
         });
-
         const location = geoRes.data.results[0].geometry.location;
         let geometrys=[location.lng,location.lat];
         console.log("Latitude:", location.lat);
